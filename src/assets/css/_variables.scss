@@ -1,0 +1,102 @@
+
+$white:    #fff !default;
+$dark-white: #d1dfff !default;
+$gray-100: #f7f9fc !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dddddd !default;
+$gray-400: #f4f6f8 !default;
+$gray-500: #adb5bd !default;
+$gray-600: #e3e3e3!default;
+$gray-700: #b7b7b7 !default;
+$gray-800: #919191 !default;
+$gray-900: #373738 !default;
+$black:    #383838 !default;
+
+$grays: () !default;
+$grays: map-merge((
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+), $grays);
+
+$lightPrimary: hsl(218, 93%, 72%);
+$skyBlue: #82a8fa;
+$blue:    #0551f6 !default;
+$light-blue: #75a5fa !default;
+$indigo:  #1d2361 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #f74c26 !default;
+$orange:  #f79926 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$colors: () !default;
+$colors: map-merge((
+  "blue":       $blue,
+  "indigo":     $indigo,
+  "purple":     $purple,
+  "pink":       $pink,
+  "red":        $red,
+  "orange":     $orange,
+  "yellow":     $yellow,
+  "green":      $green,
+  "teal":       $teal,
+  "cyan":       $cyan,
+  "white":      $white,
+  "gray":       $gray-700,
+  "gray-dark":  $gray-800
+), $colors);
+
+$primary:       $blue !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $orange !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$light-gray:    #dddddd85 !default;
+$dark:          $gray-800 !default;
+$gray: $gray-700 !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark,
+), $theme-colors);
+
+$font-family-base: "Oxygen";
+$font-weight-base: 400 !default;
+$line-height-base: 1.5 !default;
+$font-size: 12, 14, 16, 18, 20, 22, 24, 28, 30, 32, 40;
+$base-font-size: 14;
+$font-size-base: 1rem !important;
+
+$body-bg: $gray-400 !default;
+$body-color: $black !default;
+
+$grid-size: 12;
+$grid-breakpoints: (
+  xs: 0px,
+  sm: 320px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+
+$spacers: 82;

@@ -1,0 +1,4 @@
+export const FIND_ALL_BLOCKS = 'FIND_ALL_BLOCKS'
+export const FIND_BLOCK_NUMBER = 'FIND_BLOCK_NUMBER'
+export const FIND_TX_HASH = 'FIND_TX_HASH'
+export const FIND_ADDRESS = 'FIND_ADDRESS'

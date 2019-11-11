@@ -1,0 +1,87 @@
+@mixin hover {
+  &:hover { @content; }
+}
+
+@mixin hover-focus {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin plain-hover-focus {
+  &,
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin hover-focus-active {
+  &:hover,
+  &:focus,
+  &:active {
+    @content;
+  }
+}
+
+@mixin bg-variant($parent, $color) {
+  #{$parent} {
+    background-color: $color !important;
+  }
+}
+
+@mixin text-variant($parent, $color) {
+  #{$parent} {
+    color: $color !important;
+  }
+}
+
+
+@mixin bg-gradient-variant($parent, $color) {
+  #{$parent} {
+    background: $color linear-gradient(180deg, mix($body-bg, $color, 15%), $color) repeat-x !important;
+  }
+}
+
+
+// stylelint-disable declaration-no-important
+
+@each $color, $value in $theme-colors {
+  @include bg-variant(".bg-#{$color}", $value);
+  @include text-variant(".text-#{$color}", $value);
+}
+
+.bg-white {
+  background-color: $white !important;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+
+
+.bg-primary{
+  color: $white !important;
+}
+
+.text-light-primary{
+  color: $light-blue !important;
+}
+
+.text-dark-white {
+  color: $dark-white !important;
+}
+
+.text-gray{
+  color: $gray-700 !important;
+}
+
+.text-light-gray{
+  color: $gray-300 !important;
+}
+
+.text-dark-gray{
+  color: $gray-900 !important;
+}

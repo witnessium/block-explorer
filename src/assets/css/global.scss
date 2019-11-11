@@ -1,0 +1,342 @@
+@import './variables.scss';
+@import './functions.scss';
+@import './color.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box; // 1
+}
+
+
+html {
+  font-family: sans-serif; // 2
+  line-height: normal; // 3
+  -webkit-text-size-adjust: 100%; // 4
+  -ms-text-size-adjust: 100%; // 4
+  -ms-overflow-style: scrollbar; // 5
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 6
+}
+
+@at-root {
+  @-ms-viewport {
+    width: device-width;
+  }
+}
+
+//모바일
+@media (min-width: 320px) {
+  html,body{
+    font-size: 10px !important;
+    word-break: break-all;
+   
+  }
+  .container{
+    max-width: 100%;
+    margin-left: rem(10);
+    margin-right: rem(10);
+  }
+  .search{
+    display: none;
+  }
+  
+}
+
+@media (min-width: 768px) {
+  html,body{
+    font-size: 12px !important;
+  }
+  .container{
+    max-width: 100%;
+    margin-left: rem(30);
+    margin-right: rem(30);
+  }
+
+  .search{
+    display: block;
+  }
+}
+// pc
+@media (min-width: 926px) {
+  html,body{
+    font-size: 14px !important;
+  }
+  .container{
+    max-width: 100%;
+    margin-left: rem(180);
+    margin-right: rem(180);
+  }
+
+ }
+
+
+body {
+  margin: 0; // 1
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-base;
+  color: $body-color;
+  text-align: left; // 3
+  background-color: $body-bg; // 2
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+}
+
+.input{
+  display: block;
+  width: 100%;
+  height: rem(22);
+  padding: rem(8) rem(16) ;
+  color: $black;
+  background-color: $white;
+  background-image: none;
+  border: rem(1) solid $gray;
+  border-radius: rem(4);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  &::placeholder {
+    color: $gray;
+    font: italic;
+  }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $prop, $abbrev in (col: col) {
+      @for $i from 1 through $grid-size{
+        .#{$abbrev}#{$infix}-#{$i}{
+          
+          width: percentage($i/$grid-size) !important;
+          position: relative;
+          display: inline-block;
+        }
+      }
+    }
+    
+  }
+}
+
+
+//spacers
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $prop, $abbrev in (margin: m, padding: p) {
+      @for $i from 1 through $spacers{
+        .#{$abbrev}#{$infix}-#{$i} { #{$prop}: rem($i) !important; }
+        .#{$abbrev}t#{$infix}-#{$i},
+        .#{$abbrev}y#{$infix}-#{$i} {
+          #{$prop}-top: rem($i) !important;
+        }
+        .#{$abbrev}r#{$infix}-#{$i},
+        .#{$abbrev}x#{$infix}-#{$i} {
+          #{$prop}-right: rem($i) !important;
+        }
+        .#{$abbrev}b#{$infix}-#{$i},
+        .#{$abbrev}y#{$infix}-#{$i} {
+          #{$prop}-bottom: rem($i) !important;
+        }
+        .#{$abbrev}l#{$infix}-#{$i},
+        .#{$abbrev}x#{$infix}-#{$i} {
+          #{$prop}-left: rem($i) !important;
+        }
+
+        .#{$abbrev}a#{$infix}-#{$i} {
+          #{$prop}: rem($i) rem($i);
+        }
+
+      }
+    }
+  }
+}
+
+h5, .h5{
+  font-size: rem(14);
+  font-weight: 700;
+  margin: 0px 0px;
+  padding: 0px 0px;
+}
+
+h4, .h4{
+  font-size: rem(16);
+  font-weight: 700;
+  margin: 0px 0px;
+  padding: 0px 0px;
+}
+
+h2{
+  font-size: rem(32);
+  font-weight: 700;
+  margin: 0px 0px;
+  padding: 0px 0px;
+}
+
+ul {
+  margin: 0 0 !important;
+  padding: 0 0 !important;
+}
+
+.row{
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+
+  &::before{
+    display: table;
+    content: " ";
+  }
+}
+
+.float-right{
+  float: right;
+}
+
+.text-primary{
+  color: $primary;
+}
+
+.text-navi{
+  color: $indigo;
+}
+
+.text-black{
+  color: $black !important;
+}
+
+.text-align-right{
+  text-align: right;
+}
+
+.text-align-center{
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+  margin: rem(20) 0 !important;
+
+  li{
+    display: inline;
+    
+    &.active a{
+      border: solid rem(2) $skyBlue;
+      border-radius: rem(2);
+      color: $primary;
+      z-index: 2;
+      cursor: default;
+    }
+
+    &.other a{
+      background-color: transparent;
+      border:transparent;
+      line-height: rem(24)  !important;;
+      font-size: rem(14)  !important;;
+      margin: 0 rem(-2)  !important;;
+    }
+  }
+}
+
+.pagination>li>a, .pagination>li>span {
+  position: relative;
+  float: left;
+  padding: rem(6) rem(12);
+  color: $black;
+  text-decoration: none;
+  background-color: $white;
+  border: 1px solid $gray;
+  border-radius: rem(2);
+  margin: 0 rem(4);
+}
+
+.text-decoration-underline{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.tran-dtl{
+  box-shadow: 0 rem(1.5) $gray;
+  line-height: 1.71;
+
+  .row{
+    background-color: $white;
+    border-bottom: 1px solid $gray-300;
+    border-right: rem(0.5) solid $light-gray;
+    border-left: rem(0.5) solid $light-gray;
+    max-height: rem(38);
+  }
+  
+  .hash{
+    width:70%;
+    position: relative;
+    display:inline-block;
+  }
+
+  .history-hash{
+    width:90%;
+    position: relative;
+    display:inline-block;
+  }
+
+  .amount{
+    position: absolute;
+    display: inline-block;
+    font-weight: 700;
+  }
+
+  [class*=col-]{
+    margin: rem(8) 0;
+  }
+
+  .bg-gray{
+    background: $gray-100;
+    color:gray-dark;
+  }
+
+  .tran-receiver{
+    background: $warning;
+    color: $white !important;
+
+    .tran-hash{
+      color: $white !important;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+  
+  .tran-sender{
+    background: $primary;
+    color: $white !important;
+    
+    .tran-hash{
+      color: $white !important;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+.text{
+  display: block;
+  overflow: hidden;
+  white-space: nowrap; 
+  text-overflow: ellipsis;
+}
+
+.d-flex{
+  display: flex;
+}
+
