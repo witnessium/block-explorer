@@ -24,7 +24,9 @@
           </div>
         </nav>
     </header>
-    <router-view :key="$route.fullPath"></router-view>
+    <transition name="fade">
+      <router-view :key="$route.fullPath"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -41,6 +43,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
   header{
     line-height: 1.71;
     height: rem(56);
