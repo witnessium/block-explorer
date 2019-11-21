@@ -2,7 +2,7 @@
   <container-vue name="block-number-app">
     <header-title-vue
       title="Block Number"
-      subTitle="90584"
+      :subTitle="$route.params.blockNumber"
     ></header-title-vue>
     <info-vue :info="blockInfo" class="mt-31"></info-vue>
 
@@ -32,7 +32,7 @@
     components: {
       TranInfoVue
     },
-    created(){
+    created(){  
       this.$store.dispatch( this.$types.FIND_BLOCK_NUMBER, {})
     },
     computed:{
@@ -64,7 +64,7 @@
             { key: 'timestamp', title: 'Timestamp'},
             { key: 'numberOfTX', title: 'number of Tx'},
             { key: 'rootHash', title: 'State Root hash'},
-            { key: 'prevHash', title: 'Previous hash', router: '/block-number'},
+            { key: 'prevHash', title: 'Previous hash', router: 'tx-hash', params: [{key: 'prevHash', name: 'txHash'}]},
           ],
         },
         headers: [

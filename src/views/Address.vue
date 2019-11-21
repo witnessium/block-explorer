@@ -2,7 +2,7 @@
   <container-vue name="address-app">
     <header-title-vue
       title="Account Address"
-      subTitle="3BEj4fH3kTA4iS5Dtm8JKXW9MBiA9pqD9Y"
+      :subTitle="$route.params.address|| '3BEj4fH3kTA4iS5Dtm8JKXW9MBiA9pqD9Y'"
     ></header-title-vue>
     
     <info-vue :info="accountInfo" class="mt-31"></info-vue>
@@ -44,13 +44,13 @@
         },
         headerInfo: {
           sender: [
-            'Sender\'s Address',
+            'Sender’s Address',
             'My Address',
             'Value(WIT)'
           ],
           receiver: [
             'My Address',
-            'Receiver\'s Address',
+            'Receiver’s Address',
             'Value(WIT)'
           ]
         },

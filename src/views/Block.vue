@@ -20,6 +20,7 @@
           </thead>
           <tbody>
             <tr
+              class="hand"
               v-for="(item, key) in pItems"
               :key="key"
             >
@@ -28,6 +29,7 @@
                 :key="idx"
                 :width="header.width"
                 :style="`text-align: ${header.align||'center'}; ${header.style||''}`"
+                @click="$router.push({name: 'block-number', params: {blockNumber: item.blockNumber}})"
               >{{ item[header.id]}}</td>
             </tr>
             
@@ -38,6 +40,7 @@
         :pageCount="totalSize"
         v-model="page"
         :pageRange="3"
+        @click.native="goPage()"
       ></paginate-vue>
     </div>
   </container-vue>
@@ -63,19 +66,34 @@
       }
     },
     created() {
-			this.$store.dispatch( this.$types.FIND_ALL_BLOCKS, true)
+			this.$store.dispatch( this.$types.FIND_ALL_BLOCKS, {
+        page: this.page,
+        itemSize: this.itemSize,
+      })
 		},
     computed:{
       ...mapGetters([
-        'findAllBlocks'
+        'findAllBlocks',
+        'findAllBlocksCnt'
       ]),
       pItems(){
-        return this.$paginate(this.sortItems, this.page, this.itemSize)
+        return this.sortItems
       },
       totalSize(){
-        return Math.ceil(this.findAllBlocks.length/ this.itemSize)
+        return Math.ceil(this.findAllBlocksCnt/ this.itemSize)
       },
       sortItems(){
+        /**
+         * 전체 페이지 sort 할경우 param 추가 하셔서 전체 쿼리 sort된 내용 다시 보여주시면 됩니다.
+         * 
+         * this.$store.dispatch( this.$types.FIND_ALL_BLOCKS, {
+            page: this.page,
+            itemSize: this.itemSize,
+            sort: this.sortDesc
+            sortBy: this.sortBy 
+           })
+         */
+
         if ( this.sortDesc )
           return arraySort(Object.assign([], this.findAllBlocks), this.sortBy, {reverse: this.sortDesc === 'desc'})
         else
@@ -92,6 +110,12 @@
           this.sortDesc = 'asc'
         }
       },
+      goPage(){
+        this.$store.dispatch( this.$types.FIND_ALL_BLOCKS, {
+          page: this.page,
+          itemSize: this.itemSize,
+        })
+      }
     },
   }
 </script>
@@ -144,6 +168,7 @@
           border-bottom: rem(0.5) solid  $gray-300;
           border-right: rem(0.5) solid  $gray-300;
           border-left: rem(0.5) solid  $gray-300;
+          cursor: pointer;
           
           &:hover{
             background-color: #f2f9ff;

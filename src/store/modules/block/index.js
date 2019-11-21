@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 const state = {
   blocks: [],
+  blocksTotalSize: 0,
   blockNumber: {
     blockInfo: {},
     trans: []

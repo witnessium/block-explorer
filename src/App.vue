@@ -12,7 +12,7 @@
             <li @click="$router.push('/tx-hash')">
               <a :class="isActive('tx-hash')" >Transactions</a>
             </li>
-            <li @click="$router.push('/address')">
+            <li @click="$router.push('/address')" :key="$route.fullPath">
               <a :class="isActive('address')" >Addresses</a>
             </li>
           </ul>

@@ -1,8 +1,9 @@
 <template>
   <container-vue name="tx-hahs-app">
+    <!-- 해쉬 어디서 가지고오는지 모르겠어요... -->
     <header-title-vue
       title="Transaction Hash"
-      subTitle="1JcVUNtN3XLJLwtKQi4qhn2khqmeKuXL1H1JcVn2khqmeK…"
+      :subTitle="$route.params.txHash||'68b85e67a3d97e352848d2be7fc9b47c52110162'"
     ></header-title-vue>
     <info-vue :info="blockInfo" class="mt-32"></info-vue>
     <info-vue :info="tranInfo" class="mt-43"></info-vue>
@@ -30,7 +31,7 @@
         blockInfoData: {
           title: 'Block Info',
           headers: [
-            { key: 'blockNumber', title: 'Block Number', router: '/block-number'},
+            { key: 'blockNumber', title: 'Block Number', router: 'block-number', params: [{key: 'blockNumber', name: 'blockNumber'}]},
             { key: 'blockHash', title: 'Block Hash'},
             { key: 'timestamp', title: 'Timestamp'},
             { key: 'rootHash', title: 'State Root hash'},

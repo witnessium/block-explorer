@@ -6,8 +6,8 @@
           <col-vue cols="12" :class="type === 'tx'? 'col-sm-12 text': ''">
             <span class="ml-24 h5" >{{ getTitle() }}</span>
             <span
-              class="ml-23 text-primary tran-hash"
-              @click="type === 'address'? $router.push({name: 'tx-hash', params: {tranInfo: tranInfo}}) :''"
+              class="ml-23 text-primary tran-hash hand"
+              @click="goRouter(tranInfo)"
             >{{ tranInfo.tranHash|| tranInfo.sendAddress }}</span> 
           </col-vue>
         </row-vue>
@@ -92,6 +92,14 @@
       getColClass(idx){
         return idx === 0? 'ml-24': ( idx === 2? 'mr-24 text-align-right': '' )
       },
+      goRouter(info){
+        if ( ['address', 'blockNumber'].indexOf(this.type) > -1){
+          this.$router.push({name: 'tx-hash', params: {txHash: info.tranHash}})
+        }else if ( this.type === 'tx'){
+          this.$router.push({name: 'address', params: {address: info.sendAddress}})
+
+        }
+      }
     }
   }
 </script>

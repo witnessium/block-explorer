@@ -23,7 +23,7 @@
               :key="idx"
               class="text"
             >
-              <span @click="goRouter(header.router)" :class="`${header.router ? 'text-primary text-decoration-underline' : ''}`">{{info.item[header.key]}}</span>
+              <span @click="goRouter(header, info.item)" :class="`${header.router ? 'text-primary text-decoration-underline' : ''}`">{{info.item[header.key]}}</span>
             </li>
           </ul>
         </col-vue>  
@@ -37,9 +37,14 @@
     name: 'info-vue',
     props: ['info'],
     methods: {
-      goRouter(routerName){
-        if (routerName)
-          this.$router.push(routerName)
+      goRouter(header, item){
+        if (header.router){
+          let _params = {}
+          header.params.forEach((v) => {
+            _params[v.name] = item[v.key]
+          })
+          this.$router.push({name: header.router, params: _params})
+        }
       }
     }
   }
@@ -47,8 +52,6 @@
 
 <style lang="scss">
   .info{
-    
-
     ul{
       box-shadow: 0 rem(1.5) $gray;
       line-height: 1.71;

@@ -15,17 +15,17 @@ const routes = [
     props: true
   },
   {
-    path: '/block-number',
+    path: '/block-number/:blockNumber?',
     name: 'block-number',
     component: BlockNumber,
   },
   {
-    path: '/tx-hash',
+    path: '/tx-hash/:txHash?',
     name: 'tx-hash',
     component: TxHash,
   },
   {
-    path: '/address',
+    path: '/address/:address?',
     name: 'address',
     component: Address,
   },
