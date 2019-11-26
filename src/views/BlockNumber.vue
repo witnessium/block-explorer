@@ -32,8 +32,9 @@
     components: {
       TranInfoVue
     },
-    created(){  
+    created(){
       this.$store.dispatch( this.$types.FIND_BLOCK_NUMBER, {})
+//      this.$store.dispatch( this.$types.FIND_BLOCK_NUMBER, this.$route.params.blockNumber)
     },
     computed:{
       ...mapGetters([

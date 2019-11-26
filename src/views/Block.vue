@@ -60,8 +60,8 @@
         hedaers: [
           { width: '10%', title: 'Block Number', id: 'blockNumber'},
           { width: '60%', title: 'Block Hash', id: 'blockHash', align: 'left', style: 'padding-left: 40px;'},
-          { width: '20%', title: 'Timestamp', id: 'timestamp', },
-          { width: '20%', title: 'Number of Tx', id: 'numberOfTx'},
+          { width: '20%', title: 'Timestamp', id: 'createdAt', },
+          { width: '20%', title: 'Number of Tx', id: 'numberOfTransaction'},
         ],
       }
     },

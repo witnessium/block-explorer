@@ -6,8 +6,8 @@ const mutations = {
     state.blocksTotalSize = blocks.totalSize
   },
 
-  [types.FIND_BLOCK_NUMBER](state, blcokNumber) {
-    state.blockNumber = blcokNumber
+  [types.FIND_BLOCK_NUMBER](state, blockNumber) {
+    state.blockNumber = blockNumber
   },
 
   [types.FIND_TX_HASH](state, txHash) {

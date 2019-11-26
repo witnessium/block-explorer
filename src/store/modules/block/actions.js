@@ -1,5 +1,6 @@
 import * as types from '../../mutation-types'
 import blockData from '../../blockData'
+import coreNodeApi from '../../../api/coreNodeApi'
 
 let i = 0;
 let blocks = Array.from({length: 10000}, () => {
@@ -17,15 +18,26 @@ const findAllBlocks = ({commit}, params) => {
   // totalSize : 전체 데이터수
   // items: 페이징 처리된 데이터
   // params.page 현재 페이지 수
-  // params.itemSize: 리스트 데이터 수 
+  // params.itemSize: 리스트 데이터 수
+
+  coreNodeApi.getStatus().then(status => {
+    const from = status.number - (params.page - 1) * params.itemSize;
+    coreNodeApi.getBlocks(from, params.itemSize).then(blocks => {
+      commit(types.FIND_ALL_BLOCKS, {
+	totalSize: status.number,
+	items: blocks,
+      });
+    });
+  });
+
   commit(types.FIND_ALL_BLOCKS, {
     totalSize: blocks.length,
-    items: blocks.slice((params.page-1) * params.itemSize, params.page*params.itemSize)
-  })
+    items: blocks.slice((params.page - 1) * params.itemSize, params.page * params.itemSize)
+  });
 }
 
-const findBlockNumber = ({commit}, blcokNumber) => {
-  commit(types.FIND_BLOCK_NUMBER, Object.assign({}, blcokNumber, blockData.blockNumberData))
+const findBlockNumber = ({commit}, blockNumber) => {
+  commit(types.FIND_BLOCK_NUMBER, Object.assign({}, blockNumber, blockData.blockNumberData));
 }
 
 const findTxHash = ({commit}, txHash) => {
