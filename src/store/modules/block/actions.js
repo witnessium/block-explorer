@@ -29,15 +29,13 @@ const findAllBlocks = ({commit}, params) => {
       });
     });
   });
-
-  commit(types.FIND_ALL_BLOCKS, {
-    totalSize: blocks.length,
-    items: blocks.slice((params.page - 1) * params.itemSize, params.page * params.itemSize)
-  });
 }
 
-const findBlockNumber = ({commit}, blockNumber) => {
-  commit(types.FIND_BLOCK_NUMBER, Object.assign({}, blockNumber, blockData.blockNumberData));
+const findBlockNumber = ({commit}, param) => {
+  coreNodeApi.getBlock(param.blockNumber).then(blockinfo => {
+    console.log(blockinfo);
+    commit(types.FIND_BLOCK_NUMBER, blockinfo);
+  });
 }
 
 const findTxHash = ({commit}, txHash) => {

@@ -33,8 +33,9 @@
       TranInfoVue
     },
     created(){
-      this.$store.dispatch( this.$types.FIND_BLOCK_NUMBER, {})
-//      this.$store.dispatch( this.$types.FIND_BLOCK_NUMBER, this.$route.params.blockNumber)
+      this.$store.dispatch( this.$types.FIND_BLOCK_NUMBER, {
+	blockNumber: this.$route.params.blockNumber
+      })
     },
     computed:{
       ...mapGetters([
@@ -62,10 +63,10 @@
           headers: [
             { key: 'blockHash', title: 'Block Hash'},
             { key: 'blockNumber', title: 'Block Number'},
-            { key: 'timestamp', title: 'Timestamp'},
-            { key: 'numberOfTX', title: 'number of Tx'},
-            { key: 'rootHash', title: 'State Root hash'},
-            { key: 'prevHash', title: 'Previous hash', router: 'tx-hash', params: [{key: 'prevHash', name: 'txHash'}]},
+            { key: 'createdAt', title: 'Timestamp'},
+            { key: 'numberOfTransaction', title: 'number of Tx'},
+            { key: 'stateRoot', title: 'State Root hash'},
+            { key: 'parentHash', title: 'Previous hash'},
           ],
         },
         headers: [

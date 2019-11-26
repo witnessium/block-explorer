@@ -28,7 +28,7 @@ export default {
 	console.log(error);
       })
   },
-  
+
   getBlock(blockNumber) {
     return axios.get(API_URL + '/blockinfo/' + blockNumber)
       .then(function (response) {
