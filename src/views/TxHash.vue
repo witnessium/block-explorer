@@ -3,7 +3,7 @@
     <!-- 해쉬 어디서 가지고오는지 모르겠어요... -->
     <header-title-vue
       title="Transaction Hash"
-      :subTitle="$route.params.txHash||'68b85e67a3d97e352848d2be7fc9b47c52110162'"
+      :subTitle="$route.params.txHash||'37df93d26b1741a0efa601320ebc9b1e54a7cc7db1f43d92bd3728695eaa5eb5'"
     ></header-title-vue>
     <info-vue :info="blockInfo" class="mt-32"></info-vue>
     <info-vue :info="tranInfo" class="mt-43"></info-vue>
@@ -34,7 +34,7 @@
             { key: 'blockNumber', title: 'Block Number', router: 'block-number', params: [{key: 'blockNumber', name: 'blockNumber'}]},
             { key: 'blockHash', title: 'Block Hash'},
             { key: 'timestamp', title: 'Timestamp'},
-            { key: 'rootHash', title: 'State Root hash'},
+            { key: 'stateRoot', title: 'State Root hash'},
           ],
         },
         tranInfoData: {
@@ -52,7 +52,9 @@
       }
     },
     created(){
-      this.$store.dispatch( this.$types.FIND_TX_HASH, {})
+      this.$store.dispatch( this.$types.FIND_TX_HASH, {
+	txHash: this.$route.params. txHash
+      })
     },
     computed:{
       ...mapGetters([

@@ -38,4 +38,14 @@ export default {
 	console.log(error);
       })
   },
+
+  getTransaction(txHash) {
+    return axios.get(API_URL + '/txinfo/' + txHash)
+      .then(function (response) {
+	return response.data;
+      })
+      .catch(function (error) {
+	console.log(error);
+      })
+  }
 }

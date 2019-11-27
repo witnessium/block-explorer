@@ -38,8 +38,12 @@ const findBlockNumber = ({commit}, param) => {
   });
 }
 
-const findTxHash = ({commit}, txHash) => {
-  commit(types.FIND_TX_HASH, Object.assign({}, txHash, blockData.txHashData))
+const findTxHash = ({commit}, param) => {
+  coreNodeApi.getTransaction(param.txHash).then(txInfo => {
+    console.log(txInfo);
+    commit(types.FIND_TX_HASH, txInfo);
+  });
+//  commit(types.FIND_TX_HASH, Object.assign({}, param.txHash, blockData.txHashData))
 }
 
 const findAddress = ({commit}, address) => {
