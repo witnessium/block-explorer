@@ -43,11 +43,14 @@ const findTxHash = ({commit}, param) => {
     console.log(txInfo);
     commit(types.FIND_TX_HASH, txInfo);
   });
-//  commit(types.FIND_TX_HASH, Object.assign({}, param.txHash, blockData.txHashData))
 }
 
-const findAddress = ({commit}, address) => {
-  commit(types.FIND_ADDRESS, Object.assign({}, address, blockData.addressData))
+const findAddress = ({commit}, param) => {
+  coreNodeApi.getAddress(param.address).then(addressInfo => {
+    console.log(addressInfo);
+    commit(types.FIND_ADDRESS, addressInfo);
+  });
+//  commit(types.FIND_ADDRESS, Object.assign({}, address, blockData.addressData))
 }
 
 export default {

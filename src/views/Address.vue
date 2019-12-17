@@ -2,7 +2,7 @@
   <container-vue name="address-app">
     <header-title-vue
       title="Account Address"
-      :subTitle="$route.params.address|| '3BEj4fH3kTA4iS5Dtm8JKXW9MBiA9pqD9Y'"
+      :subTitle="$route.params.address|| '019d5ec5f66a1d863fd0a6ba1b9b6f22e353adf6'"
     ></header-title-vue>
     
     <info-vue :info="accountInfo" class="mt-31"></info-vue>
@@ -57,15 +57,18 @@
       }
     },
     created(){
-      this.$store.dispatch( this.$types.FIND_ADDRESS, {})
+      this.$store.dispatch( this.$types.FIND_ADDRESS, {
+	address: this.$route.params.address
+      })
     },
     computed:{
       ...mapGetters([
-        'findAddress'
+	'findAddress',
+	'findAccountInfo',
       ]),
       accountInfo(){
         return Object.assign({}, this.accountInfoData, {
-          item: this.findAddress.accountInfo 
+          item: this. findAccountInfo
         })
       },
       tranList(){
