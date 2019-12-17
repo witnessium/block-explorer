@@ -15,7 +15,7 @@
       <col-vue cols="6" style="margin: 0 0;" class="col-sm-5">
         <row-vue style="border: none;border-bottom: 0.07143rem solid #b7b7b7;"  class="text" :class="getTilteBg">
           <col-vue cols="12" class="text-align-right" v-if="tranInfo.totalValue || tranInfo.timestamp">
-            <h5 class="mr-24">{{ tranInfo.totalValue? 'Total Value '+ tranInfo.totalValue : tranInfo.timestamp}}</h5>
+            <h5 class="mr-24">Total Value {{ comma(tranInfo.totalValue) }}</h5>
           </col-vue>
         </row-vue>
       </col-vue>
@@ -64,7 +64,9 @@
 <script>
   import TranBlockNumberVue from '@/components/TranBlockNumberVue'
   import TranTxVue from '@/components/TranTxVue'
-  import TranAddressVue from '@/components/TranAddressVue'
+import TranAddressVue from '@/components/TranAddressVue'
+
+  import { formatNumber } from '../../util/format.js'
 
   export default {
     components: {
@@ -99,7 +101,10 @@
           this.$router.push({name: 'address', params: {address: info.sendAddress}})
 
         }
-      }
+      },
+      comma(obj) {
+	return formatNumber(obj);
+      },
     }
   }
 </script>

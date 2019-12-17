@@ -8,20 +8,27 @@
         >{{ item.sendAddress }}</span>
       </div>
       <div class="amount text" v-if="item.amt">
-        ({{ item.amt }}WIT)
+        ({{ comma(item.amt) }}WIT)
       </div>
     </col-vue>
     <col-vue cols="5" class="text">
       {{ item.receiveAddress }}
     </col-vue>
     <col-vue cols="2" class="text-align-right text">
-      <h5 class="mr-24 text"><b>{{ item.value }}</b></h5>
+      <h5 class="mr-24 text"><b>{{ comma(item.value) }}</b></h5>
     </col-vue>
   </row-vue>
 </template>
 
 <script>
+import { formatNumber } from '../util/format.js'
+
 export default {
-  props: ['item']
+  props: ['item'],
+  methods: {
+    comma(obj) {
+      return formatNumber(obj);
+    },
+  },
 }
 </script>

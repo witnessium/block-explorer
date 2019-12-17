@@ -21,12 +21,14 @@
       </span>
     </col-vue>
     <col-vue cols="2" class="text-align-right">
-      <h5 class="mr-24 text"><b>{{ item.value }}</b></h5>
+      <h5 class="mr-24 text"><b>{{ comma(item.value) }}</b></h5>
     </col-vue>
   </row-vue>
 </template>
 
 <script>
+  import { formatNumber } from '../util/format.js'
+
   export default {
     props: ['item', 'type'],
     computed:{
@@ -37,7 +39,10 @@
     methods:{
       isPrimary(type){
         return this.type === type ? 'text-primary': ''
-      }
+      },
+      comma(obj) {
+	return formatNumber(obj);
+      },
     }
   }
 </script>
