@@ -1,0 +1,144 @@
+<template>
+  <container-vue name="new-ticket-app">
+    <div class="title">New Traffic Ticket</div>
+    <row-vue class="info">
+      <col-vue cols="12">
+        <div class="badge"></div><span class="h4">Input New Traffic Ticket</span>
+      </col-vue>
+      <col-vue cols="12" class="mt-12">
+        <div class="items-class">
+          <col-vue cols="3" class="header label col-sm-5">
+            <label for="photo">Photo</label>
+          </col-vue>
+          <col-vue cols="9" class="col-sm-7">
+            <input type="file" name="photo" id="photo" ref="photo" accept="image/*" @change="updatePhoto()">
+          </col-vue>
+        </div>
+        <div v-for="item in items" :key="item.key" class="items-class">
+          <col-vue cols="3" class="header label col-sm-5">
+            <label v-bind:for="item.key">{{ item.label }}</label>
+          </col-vue>
+          <col-vue cols="9" class="col-sm-7">
+            <div v-if="item.type === 'date'"><datetime v-model="$data.ticket[item.key]" type='datetime' /></div>
+            <input v-else  v-bind:type="item.type" v-bind:name="item.key" v-bind:id="item.key" v-model="$data.ticket[item.key]">
+          </col-vue>
+        </div>
+      </col-vue>
+      <col-vue cols="12">
+        <button type="submit" id="submit" @click="submit()">Submit</button>
+      </col-vue>
+    </row-vue>
+  </container-vue>
+</template>
+
+<script>
+  import coreNodeApi from '@/api/coreNodeApi'
+
+  export default {
+    name: 'NewTicket',
+    data(){
+      return {
+        ticket: {
+          photo: '',
+          owner: '',
+          license: '',
+          car: '',
+          phone: '',
+          violation: '',
+          location: '',
+          datetime: '',
+          amount: '',
+          ticketTxHash: '',
+          payedAt: '',
+          paymentDescription: '',
+        },
+        items: [
+          { type: 'text', label: 'Owner Name', key: 'owner'},
+          { type: 'text', label: 'License Number', key: 'license'},
+          { type: 'text', label: 'Car Number', key: 'car'},
+          { type: 'text', label: 'Phone Number', key: 'phone'},
+          { type: 'text', label: 'Violation', key: 'violation'},
+          { type: 'text', label: 'Violation Location', key: 'location'},
+          { type: 'date', label: 'DateTime', key: 'datetime'},
+          { type: 'text', label: 'Amount', key: 'amount'},
+          { type: 'text', label: 'Ticket Transaction Hash', key: 'ticketTxHash'},
+          { type: 'date', label: 'Payed At', key: 'payedAt'},
+          { type: 'text', label: 'Payment Description', key: 'paymentDescription'},
+        ],
+      }
+    },
+    methods: {
+      updatePhoto(){
+        this.ticket.photo = this.$refs.photo.files[0];
+      },
+      submit() {
+        let formData = new FormData();
+        let ticket = this.$data.ticket;
+        if (ticket.photo) {
+          formData.append('photo', ticket.photo);
+        }
+	for(const item of this.$data.items) {
+          let value = this.$data.ticket[item.key]
+          if (value) formData.append(item.key, value);
+	}
+        let this0 = this;
+        coreNodeApi.postTicket(formData).then(function (response) {
+          this0.photo='';
+        });
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  #new-ticket-app{
+    .info{
+      .items-class{
+        box-shadow: 0 rem(1.5) $gray;
+        line-height: 1.71;
+        list-style-type: none;
+        position: relative;
+        margin: 0;
+        padding: 0;
+
+        .label{
+          font-weight: 700;
+          padding: rem(10.5) rem(10);
+          background-color: $white;
+          border-bottom: 1px solid $gray-300;
+          border-right: rem(1) solid$light-gray;;
+          border-left: rem(1) solid $light-gray;;
+        }
+
+        input{
+          width: inherit;
+          position: relative;
+//          display: block;
+          padding: rem(10.5) rem(24);
+          background-color: $white;
+          border-bottom: 1px solid $gray-300;
+          border-right: rem(1) solid$light-gray;;
+          border-left: rem(1) solid $light-gray;;
+        }
+
+      }
+
+      .badge{
+        width: rem(10);
+        height: rem(17);
+        background: $primary;
+        transform: skewx(10deg);
+        float: left;
+        margin-right: rem(8);
+        margin-left: rem(12);
+      }
+    }
+    .title{
+      padding-top: rem(47);
+      padding-bottom: rem(25);
+      font-size: rem(32);
+      font-weight: 700;
+    }
+  }
+
+</style>

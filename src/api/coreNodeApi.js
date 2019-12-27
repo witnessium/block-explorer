@@ -1,8 +1,20 @@
 import axios from 'axios'
 
-const API_URL = 'https://api.demo.witnessium.org'
+const API_URL = 'http://localhost:8080'
 
 export default {
+
+  postTicket(ticket) {
+    return axios.post(API_URL + '/ticket', ticket, {
+      headers: {
+	'Content-Type': 'multipart/form-data'
+      }
+    }).then(function (response) {
+      return response.data;
+    }).catch(function (error) {
+      console.log(error);
+    })
+  },
 
   getStatus() {
     return axios.get(API_URL + '/status')
@@ -42,7 +54,7 @@ export default {
   getTransaction(txHash) {
     return axios.get(API_URL + '/txinfo/' + txHash)
       .then(function (response) {
-	return response.data;
+	return response.data.value.ticketData;
       })
       .catch(function (error) {
 	console.log(error);

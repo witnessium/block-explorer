@@ -4,6 +4,7 @@ import Block from '@/views/Block'
 import BlockNumber from '@/views/BlockNumber'
 import TxHash from '@/views/TxHash'
 import Address from '@/views/Address'
+import NewTicket from '@/views/NewTicket'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,12 @@ const routes = [
     path: '/',
     name: 'block',
     component: Block,
+    props: true
+  },
+  {
+    path: '/new',
+    name: 'new-ticket',
+    component: NewTicket,
     props: true
   },
   {

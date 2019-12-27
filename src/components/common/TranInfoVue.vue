@@ -64,7 +64,7 @@
 <script>
   import TranBlockNumberVue from '@/components/TranBlockNumberVue'
   import TranTxVue from '@/components/TranTxVue'
-import TranAddressVue from '@/components/TranAddressVue'
+  import TranAddressVue from '@/components/TranAddressVue'
 
   import { formatNumber } from '../../util/format.js'
 

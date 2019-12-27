@@ -6,6 +6,9 @@
         </div>
         <nav class="navbar-collapse"> 
           <ul>
+            <li @click="$router.push('/new')">
+              <a :class="isActive('new-ticket')" >New Ticket</a>
+            </li>
             <li @click="$router.push('/')">
               <a :class="isActive('block')" >Blocks</a>
             </li>
