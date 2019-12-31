@@ -1,11 +1,11 @@
 <template>
   <container-vue name="address-app">
     <header-title-vue
-      title="Account Address"
-      :subTitle="$route.params.address|| '019d5ec5f66a1d863fd0a6ba1b9b6f22e353adf6'"
+      title="Ticket By License"
+      :subTitle="$route.params.license || '019d5ec5f66a1d863fd0a6ba1b9b6f22e353adf6'"
     ></header-title-vue>
     
-    <info-vue :info="accountInfo" class="mt-31"></info-vue>
+    <info-vue :info="licenseInfo" class="mt-31"></info-vue>
     <div class="row mt-50 transaction">
       <h4 class="mb-2">Transaction History</h4>
       <tran-info-vue 
@@ -23,6 +23,7 @@
     ></paginate-vue>
   </container-vue>
 </template>
+
 <script>
   import TranInfoVue from '@/components/common/TranInfoVue'
   import { mapGetters } from 'vuex'
@@ -37,9 +38,10 @@
         page: 1,
         itemSize: 15,
         accountInfoData: {
-          title: 'Account Info',
+          title: 'Summary',
           headers: [
-            {key: 'balance', title: 'Balance(WIT)'}
+            {key: 'total', title: 'Total'}, 
+            {key: 'unpaid', title: 'Unpaid'},
           ],
         },
         headerInfo: {
@@ -58,7 +60,7 @@
     },
     created(){
       this.$store.dispatch( this.$types.FIND_ADDRESS, {
-	address: this.$route.params.address
+	address: this.$route.params.license
       })
     },
     computed:{
@@ -66,16 +68,16 @@
 	'findAddress',
 	'findAccountInfo',
       ]),
-      accountInfo(){
-        return Object.assign({}, this.accountInfoData, {
+      licenseInfo(){
+        return Object.assign({}, this. accountInfoData, {
           item: this. findAccountInfo
         })
       },
       tranList(){
-        return this.$paginate(this.findAddress.trans, this.page, this.itemSize)
+        return this.$paginate(this.findAddress.tickets, this.page, this.itemSize)
       },
       totalSize(){
-        return Math.ceil(this.findAddress.trans.length/ this.itemSize)
+        return Math.ceil(this.findAddress.tickets.length/ this.itemSize)
       },
     },
   }

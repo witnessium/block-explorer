@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import * as types from '@/store/mutation-types'
+import { Datetime } from 'vue-datetime'
+
+import 'vue-datetime/dist/vue-datetime.css'
 
 import './assets/css/global.scss'
 import 'babel-polyfill'
@@ -15,9 +18,9 @@ import HeaderTitleVue from '@/components/common/HeaderTitleVue'
 import InfoVue from '@/components/common/InfoVue'
 import PaginateVue from '@/components/common/PaginateVue'
 
-
 Vue.config.productionTip = false
 
+Vue.component('datetime', Datetime);
 Vue.component(IconVue.name, IconVue)
 Vue.component(ContainerVue.name, ContainerVue)
 Vue.component(RowVue.name, RowVue)

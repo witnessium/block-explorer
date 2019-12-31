@@ -5,7 +5,7 @@
     </col-vue>
     <col-vue cols="12" class="mt-12">
       <row-vue>
-        <col-vue cols="2" class="col-sm-5">
+        <col-vue cols="3" class="col-sm-5">
           <ul class="header pr-md-8 pr-sm-2" >
             <li
               v-for="(header, idx) in info.headers"
@@ -16,7 +16,7 @@
             </li>
           </ul>
         </col-vue>
-        <col-vue cols="10" class="col-sm-7">
+        <col-vue cols="9" class="col-sm-7">
           <ul>
             <li
               v-for="(header, idx) in info.headers"

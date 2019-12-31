@@ -12,8 +12,9 @@ export const findTxHash = state => state.txHash
 export const findAddress = state => state.address
 
 export const findAccountInfo = state => {
-  const info = state.address.accountInfo
+  const info = state.address.licenseInfo
   if (info) return {
-    balance: formatNumber(info.balance),
+    total: formatNumber(info.total),
+    unpaid: formatNumber(info.unpaid),
   }
 }

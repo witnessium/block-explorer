@@ -2,17 +2,6 @@ import * as types from '../../mutation-types'
 import blockData from '../../blockData'
 import coreNodeApi from '../../../api/coreNodeApi'
 
-let i = 0;
-let blocks = Array.from({length: 10000}, () => {
-  i ++;
-  return {
-    blockNumber: Number(90000) + i,
-    blockHash: Math.random().toString(36) + Math.random().toString(36) + Math.random().toString(36) + Math.random().toString(36)+ Math.random().toString(36)+ Math.random().toString(36),
-    timestamp: '2019-09-03 14:26:25',
-    numberOfTx: i
-  }
-})
-
 const findAllBlocks = ({commit}, params) => {
   // 쿼리로 페이징 처리해서 결과를 가지고 오시면 됩니다.
   // totalSize : 전체 데이터수
@@ -39,9 +28,12 @@ const findBlockNumber = ({commit}, param) => {
 }
 
 const findTxHash = ({commit}, param) => {
-  coreNodeApi.getTransaction(param.txHash).then(txInfo => {
-    console.log(txInfo);
-    commit(types.FIND_TX_HASH, txInfo);
+  coreNodeApi.getTransaction(param.txHash).then(ticket => {
+    console.log(ticket);
+    commit(types.FIND_TX_HASH, {
+      photoSrc: coreNodeApi.API_URL + '/ticket/file/' + param.txHash + '-' + ticket.photo.filename,
+      ticket: ticket,
+    });
   });
 }
 
@@ -50,7 +42,6 @@ const findAddress = ({commit}, param) => {
     console.log(addressInfo);
     commit(types.FIND_ADDRESS, addressInfo);
   });
-//  commit(types.FIND_ADDRESS, Object.assign({}, address, blockData.addressData))
 }
 
 export default {

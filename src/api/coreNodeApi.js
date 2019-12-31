@@ -4,6 +4,8 @@ const API_URL = 'http://localhost:8080'
 
 export default {
 
+  API_URL: API_URL,
+
   postTicket(ticket) {
     return axios.post(API_URL + '/ticket', ticket, {
       headers: {
@@ -52,7 +54,7 @@ export default {
   },
 
   getTransaction(txHash) {
-    return axios.get(API_URL + '/txinfo/' + txHash)
+    return axios.get(API_URL + '/transaction/' + txHash)
       .then(function (response) {
 	return response.data.value.ticketData;
       })
@@ -62,7 +64,7 @@ export default {
   },
 
   getAddress(address) {
-    return axios.get(API_URL + '/address/' + address)
+    return axios.get(API_URL + '/ticket?license=' + address)
       .then(function (response) {
 	return response.data;
       })

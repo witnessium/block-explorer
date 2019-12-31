@@ -16,7 +16,7 @@
               <a :class="isActive('tx-hash')" >Transactions</a>
             </li>
             <li @click="$router.push('/address')" :key="$route.fullPath">
-              <a :class="isActive('address')" >Addresses</a>
+              <a :class="isActive('license')" >License</a>
             </li>
           </ul>
           <div class="float-right search">

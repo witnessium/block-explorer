@@ -15,13 +15,13 @@ const state = {
     trans: []
   },
   txHash: {
-    blcokInfo: {},
-    tranInfo: {},
-    tran: {}
+    photoSrc: '',
+    ticketInfo: {},
+    paymentInfo: {},
   },
   address: {
-    accountInfo: {},
-    trans: []
+    licenseInfo: {},
+    tickets: []
   }
 }
 

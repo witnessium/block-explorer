@@ -32,8 +32,8 @@ const routes = [
     component: TxHash,
   },
   {
-    path: '/address/:address?',
-    name: 'address',
+    path: '/license/:license?',
+    name: 'license',
     component: Address,
   },
   

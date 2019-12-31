@@ -11,7 +11,7 @@
             <label for="photo">Photo</label>
           </col-vue>
           <col-vue cols="9" class="col-sm-7">
-            <input type="file" name="photo" id="photo" ref="photo" accept="image/*" @change="updatePhoto()">
+            <input type="file" name="photo" id="photo" ref="photo" accept="image/jpeg" @change="updatePhoto()">
           </col-vue>
         </div>
         <div v-for="item in items" :key="item.key" class="items-class">
@@ -24,8 +24,11 @@
           </col-vue>
         </div>
       </col-vue>
+    </row-vue>
+    <row-vue class="info">
       <col-vue cols="12">
-        <button type="submit" id="submit" @click="submit()">Submit</button>
+        <button type="submit" class="styled" id="submit" @click="submit()">Submit</button>
+        <a v-if="notifyUrl" v-bind:href="notifyUrl" target="_blank">{{ notifyUrl }}</a>
       </col-vue>
     </row-vue>
   </container-vue>
@@ -65,6 +68,7 @@
           { type: 'date', label: 'Payed At', key: 'payedAt'},
           { type: 'text', label: 'Payment Description', key: 'paymentDescription'},
         ],
+	notifyUrl: ''
       }
     },
     methods: {
@@ -83,9 +87,15 @@
 	}
         let this0 = this;
         coreNodeApi.postTicket(formData).then(function (response) {
+          console.log(response);
+          this0.notifyUrl = 'http://localhost:8080/notification/' + response;
+          console.log(this.$data.notifyUrl);
           this0.photo='';
         });
       }
+    },
+    beforeMount() {
+      this.$data.notifyUrl = '';
     }
   }
 </script>
@@ -139,6 +149,34 @@
       font-size: rem(32);
       font-weight: 700;
     }
+    .styled {
+        border: 0;
+        line-height: 2.5;
+	margin: 10px 5px;
+        padding: 0 20px;
+        font-size: 1rem;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px 1px 1px #000;
+        border-radius: 10px;
+        background-color: rgba(5, 81, 246, 1);
+        background-image: linear-gradient(to top left,
+                                          rgba(0, 0, 0, .2),
+                                          rgba(0, 0, 0, .2) 30%,
+                                          rgba(0, 0, 0, 0));
+        box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                    inset -2px -2px 3px rgba(0, 0, 0, .6);
+    }
+
+    .styled:hover {
+        background-color: rgba(89, 139, 255, 1);
+    }
+
+    .styled:active {
+        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                    inset 2px 2px 3px rgba(0, 0, 0, .6);
+    }
+
   }
 
 </style>
