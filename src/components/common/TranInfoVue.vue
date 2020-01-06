@@ -1,7 +1,7 @@
 <template>
   <col-vue cols="12" class="mt-16 tran-dtl ">
     <row-vue >
-      <col-vue cols="6" style="margin: 0 0;" class="col-sm-7">
+      <col-vue cols="9" style="margin: 0 0;" class="col-sm-7">
         <row-vue style="border: none;border-bottom: 0.07143rem solid #b7b7b7;"  class="text" :class="getTilteBg">
           <col-vue cols="12" :class="type === 'tx'? 'col-sm-12 text': ''">
             <span class="ml-24 h5" >{{ getTitle() }}</span>
@@ -12,7 +12,7 @@
           </col-vue>
         </row-vue>
       </col-vue>
-      <col-vue cols="6" style="margin: 0 0;" class="col-sm-5">
+      <col-vue cols="3" style="margin: 0 0;" class="col-sm-5">
         <row-vue style="border: none;border-bottom: 0.07143rem solid #b7b7b7;"  class="text" :class="getTilteBg">
           <col-vue cols="12" class="text-align-right" v-if="tranInfo.amount">
             <h5 class="mr-24">Total Value {{ comma(tranInfo.amount) }}</h5>
