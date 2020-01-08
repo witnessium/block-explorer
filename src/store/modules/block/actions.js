@@ -31,7 +31,7 @@ const findTxHash = ({commit}, param) => {
   coreNodeApi.getTransaction(param.txHash).then(ticket => {
     console.log(ticket);
     commit(types.FIND_TX_HASH, {
-      photoSrc: coreNodeApi.API_URL + '/ticket/file/' + param.txHash + '-' + ticket.photo.filename,
+      footageSrc: coreNodeApi.API_URL + '/ticket/file/' + param.txHash + '-' + ticket.footage.filename,
       ticket: ticket,
     });
   });

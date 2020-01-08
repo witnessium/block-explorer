@@ -14,8 +14,8 @@
       </col-vue>
       <col-vue cols="3" style="margin: 0 0;" class="col-sm-5">
         <row-vue style="border: none;border-bottom: 0.07143rem solid #b7b7b7;"  class="text" :class="getTilteBg">
-          <col-vue cols="12" class="text-align-right" v-if="tranInfo.amount">
-            <h5 class="mr-24">Total Value {{ comma(tranInfo.amount) }}</h5>
+          <col-vue cols="12" class="text-align-right" v-if="tranInfo.penalty">
+            <h5 class="mr-24">Total Value {{ comma(tranInfo.penalty) }}</h5>
           </col-vue>
         </row-vue>
       </col-vue>
@@ -80,7 +80,7 @@
         return this.type === 'sender'? '': 'text-primary'
       },
       getTilteBg(){
-        return !this.tranInfo.payedAt? '': ( this.tranInfo. payedAt? 'tran-sender': 'tran-receiver')
+        return !this.tranInfo.paymentDate? '': ( this.tranInfo.paymentDate? 'tran-sender': 'tran-receiver')
       }
     },
     methods: {

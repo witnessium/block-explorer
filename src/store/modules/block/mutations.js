@@ -16,24 +16,24 @@ const mutations = {
   },
 
   [types.FIND_TX_HASH](state, param) {
-    if (param.ticket.photo) {
-      state.txHash.photoSrc = param.photoSrc
+    if (param.ticket.footage) {
+      state.txHash.footageSrc = param.footageSrc
     }
     state.txHash.ticketInfo = {
       blockNumber: guard(param.ticket.nonce),
-      owner:       guard(param.ticket.owner),
-      license:     guard(param.ticket.license),
-      car:         guard(param.ticket.car),
-      phone:       guard(param.ticket.phone),
-      violation:   guard(param.ticket.violation),
-      occuredAt:   guard(param.ticket.occuredAt),
-      location:    guard(param.ticket.location),
-      amount:      guard(param.ticket.amount),
+      driverName : guard(param.ticket.driverName),
+      licenseNo  : guard(param.ticket.licenseNo),
+      plateNo    : guard(param.ticket.plateNo),
+      contactInfo: guard(param.ticket.contactInfo),
+      offense    : guard(param.ticket.offense),
+      location   : guard(param.ticket.location),
+      date       : guard(param.ticket.date),
+      penalty    : guard(param.ticket.penalty),
     };
     state.txHash.paymentInfo = {
       ticketTxHash: guard(param.ticket.ticketTxHash),
-      payedAt: guard(param.ticket.payedAt),
-      paymentDescription: guard(param.ticket.paymentDescription),
+      paymentDate : guard(param.ticket.paymentDate),
+      paymentType : guard(param.ticket.paymentType),
     };
   },
 

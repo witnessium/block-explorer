@@ -10,13 +10,13 @@
 	<row-vue>
           <col-vue cols="3" class="col-sm-5">
             <ul class="header pr-md-8 pr-sm-2" >
-              <li id="photo-desc" class="text">Photo</li>
+              <li id="footage-desc" class="text">Camera Foootage</li>
             </ul>
           </col-vue>
           <col-vue cols="9" class="col-sm-7">
             <ul>
-              <li id="photo" class="text">
-		<img v-bind:src="photoSrc">
+              <li id="footage" class="text">
+		<img v-bind:src="findTxHash.footageSrc">
               </li>
             </ul>
           </col-vue>
@@ -30,7 +30,7 @@
 
 <script>
   import TranInfoVue from '@/components/common/TranInfoVue'
-  import { mapGetters, mapState } from 'vuex'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'TxHash',
@@ -40,22 +40,22 @@
           title: 'Ticket Info',
           headers: [
             { key: 'blockNumber', title: 'Block Number', router: 'block-number', params: [{key: 'blockNumber', name: 'blockNumber'}]},
-            { key: 'owner', title: 'Owner Name'},
-            { key: 'license', title: 'License Number', router: 'license', params: [{key: 'license', name: 'license'}]},
-            { key: 'car', title: 'Car Number'},
-            { key: 'phone', title: 'Phone Number'},
-            { key: 'violation', title: 'Violation'},
-            { key: 'occuredAt', title: 'Occured At'},
+            { key: 'driverName', title: "Driver's Name"},
+            { key: 'licenseNo', title: 'License No.', router: 'license', params: [{key: 'licenseNo', name: 'licenseNo'}]},
+            { key: 'plateNo', title: 'Plate No.'},
+            { key: 'contactInfo', title: 'Contact Info'},
+            { key: 'offense', title: 'Offense'},
             { key: 'location', title: 'Location'},
-            { key: 'amount', title: 'Amount'},
+            { key: 'date', title: 'Date'},
+            { key: 'penalty', title: 'Penalty'},
           ],
         },
         paymentInfoData: {
           title: 'Payment Info',
           headers: [
             { key: 'ticketTxHash', title: 'Ticket Tx Hash'},
-            { key: 'payedAt', title: 'Payed At'},
-            { key: 'paymentDescription', title: 'Description'},
+            { key: 'paymentDate', title: 'Payment Date'},
+            { key: 'paymentType', title: 'Payment Type'},
           ],
         },
       }
@@ -69,9 +69,6 @@
       ...mapGetters([
         'findTxHash'
       ]),
-      ...mapState({
-	photoSrc: state => state.block.txHash.photoSrc,
-      }),
       ticketInfo(){
         return Object.assign({}, this.ticketInfoData, {
           item: this.findTxHash.ticketInfo
@@ -108,11 +105,11 @@
         border-right: rem(1) solid$light-gray;;
         border-left: rem(1) solid $light-gray;;
       }
-      li#photo-desc{
+      li#footage-desc{
         height: 250px;
         line-height:220px;
       }
-      li#photo{
+      li#footage{
         height: 250px;
         img{
           max-height:230px;

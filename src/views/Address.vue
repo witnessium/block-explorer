@@ -1,8 +1,8 @@
 <template>
   <container-vue name="address-app">
     <header-title-vue
-      title="Ticket By License"
-      :subTitle="$route.params.license || '019d5ec5f66a1d863fd0a6ba1b9b6f22e353adf6'"
+      title="Ticket By License No"
+      :subTitle="$route.params.licenseNo || '019d5ec5f66a1d863fd0a6ba1b9b6f22e353adf6'"
     ></header-title-vue>
     
     <info-vue :info="licenseInfo" class="mt-31"></info-vue>
@@ -60,7 +60,7 @@
     },
     created(){
       this.$store.dispatch( this.$types.FIND_ADDRESS, {
-	address: this.$route.params.license
+	address: this.$route.params.licenseNo
       })
     },
     computed:{

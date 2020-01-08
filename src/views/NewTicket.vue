@@ -8,10 +8,10 @@
       <col-vue cols="12" class="mt-12">
         <div class="items-class">
           <col-vue cols="3" class="header label col-sm-5">
-            <label for="photo">Photo</label>
+            <label for="photo">Camera Footage</label>
           </col-vue>
           <col-vue cols="9" class="col-sm-7">
-            <input type="file" name="photo" id="photo" ref="photo" accept="image/jpeg" @change="updatePhoto()">
+            <input type="file" name="footage" id="footage" ref="footage" accept="image/jpeg" @change="updateFootage()">
           </col-vue>
         </div>
         <div v-for="item in items" :key="item.key" class="items-class">
@@ -42,44 +42,44 @@
     data(){
       return {
         ticket: {
-          photo: '',
-          owner: '',
-          license: '',
-          car: '',
-          phone: '',
-          violation: '',
+          footage: '',
+          driverName: '',
+          licenseNo: '',
+          plateNo: '',
+          contactInfo: '',
+          offense: '',
           location: '',
-          datetime: '',
-          amount: '',
+          date: '',
+          penalty: '',
           ticketTxHash: '',
-          payedAt: '',
-          paymentDescription: '',
+          paymentDate: '',
+          paymentType: '',
         },
         items: [
-          { type: 'text', label: 'Owner Name', key: 'owner'},
-          { type: 'text', label: 'License Number', key: 'license'},
-          { type: 'text', label: 'Car Number', key: 'car'},
-          { type: 'text', label: 'Phone Number', key: 'phone'},
-          { type: 'text', label: 'Violation', key: 'violation'},
-          { type: 'text', label: 'Violation Location', key: 'location'},
-          { type: 'date', label: 'DateTime', key: 'datetime'},
-          { type: 'text', label: 'Amount', key: 'amount'},
+          { type: 'text', label: "Driver's Name", key: 'driverName'},
+          { type: 'text', label: 'License No.', key: 'licenseNo'},
+          { type: 'text', label: 'Plate No.', key: 'plateNo'},
+          { type: 'text', label: 'Contact Info', key: 'contactInfo'},
+          { type: 'text', label: 'Offense', key: 'offense'},
+          { type: 'text', label: 'Location', key: 'location'},
+          { type: 'date', label: 'Date', key: 'date'},
+          { type: 'text', label: 'Penalty', key: 'penalty'},
           { type: 'text', label: 'Ticket Transaction Hash', key: 'ticketTxHash'},
-          { type: 'date', label: 'Payed At', key: 'payedAt'},
-          { type: 'text', label: 'Payment Description', key: 'paymentDescription'},
+          { type: 'date', label: 'Payment Date', key: 'paymentDate'},
+          { type: 'text', label: 'Payment Type', key: 'paymentType'},
         ],
 	notifyUrl: ''
       }
     },
     methods: {
-      updatePhoto(){
-        this.ticket.photo = this.$refs.photo.files[0];
+      updateFootage(){
+        this.ticket.footage = this.$refs.footage.files[0];
       },
       submit() {
         let formData = new FormData();
         let ticket = this.$data.ticket;
-        if (ticket.photo) {
-          formData.append('photo', ticket.photo);
+        if (ticket.footage) {
+          formData.append('footage', ticket. footage);
         }
 	for(const item of this.$data.items) {
           let value = this.$data.ticket[item.key]
@@ -89,8 +89,8 @@
         coreNodeApi.postTicket(formData).then(function (response) {
           console.log(response);
           this0.notifyUrl = 'http://localhost:8080/notification/' + response;
-          console.log(this.$data.notifyUrl);
-          this0.photo='';
+          console.log(this0.$data.notifyUrl);
+          this0.footage='';
         });
       }
     },

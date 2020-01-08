@@ -64,7 +64,7 @@ export default {
   },
 
   getAddress(address) {
-    return axios.get(API_URL + '/ticket?license=' + address)
+    return axios.get(API_URL + '/ticket?licenseNo=' + address)
       .then(function (response) {
 	return response.data;
       })
