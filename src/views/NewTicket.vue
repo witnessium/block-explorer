@@ -88,7 +88,7 @@
         let this0 = this;
         coreNodeApi.postTicket(formData).then(function (response) {
           console.log(response);
-          this0.notifyUrl = 'http://localhost:8080/notification/' + response;
+          this0.notifyUrl = coreNodeApi.API_URL + '/notification/' + response;
           console.log(this0.$data.notifyUrl);
           this0.footage='';
         });

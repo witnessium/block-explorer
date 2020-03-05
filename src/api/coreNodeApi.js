@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:8080'
+const API_URL = 'https://api.traffic.demo.witnessium.org'
+//const API_URL = 'http://localhost:8080'
 
 export default {
 
