@@ -2,7 +2,7 @@
   <div id="app">
     <header>
         <div class="navbar">
-          <img src="@/assets/images/witnessium-logo.png" class="logo" @click="$router.push('/')"/>
+          <img src="@/assets/images/buchigo_favicon.png" class="logo" @click="$router.push('/')"/>
         </div>
         <nav class="navbar-collapse"> 
           <ul>
